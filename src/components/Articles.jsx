@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { fetchArticles } from "../api";
+import { fetchArticles } from "../api/api";
+import { Link } from "react-router-dom";
+
 
 export default function Articles() {
     const [articles, setArticles] = useState([]);
@@ -21,7 +23,9 @@ export default function Articles() {
         <ul style={{ listStyle: "none", padding: 0, display: "grid", gap: "12px" }}>
             {articles.map((a) => (
                 <li key={a.article_id} style={{ border: "1px solid #ddd", borderRadius: 8, padding: 12 }}>
-                    <h3 style={{ margin: "0 0 8px" }}>{a.title}</h3>
+                    <h3 style={{ margin: "0 0 8px" }}>
+                        <Link to={`/articles/${a.article_id}`}>{a.title}</Link>
+                    </h3>
                     <p style={{ margin: "0 0 8px" }}>
                         {a.topic} • by {a.author}
                     </p>

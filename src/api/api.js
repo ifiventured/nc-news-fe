@@ -27,3 +27,5 @@ export const fetchCommentsByArticleId = (article_id) => {
         return res.json();
     }).then((data) => data.comments);
 };
+
+
