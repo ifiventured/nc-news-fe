@@ -48,4 +48,21 @@ export const fetchCommentsByArticleId = (article_id) => {
     }).then((data) => data.comments);
 };
 
-
+export const postCommentByArticleId = (article_id, username, body) => {
+    return fetch(`${BASE_URL}/articles/${article_id}/comments`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, body }),
+    }).then(async (res) => {
+        if (!res.ok) {
+            let data = {};
+            try {
+                data = await res.json();
+            } catch {
+                data = {};
+            }
+            throw new Error(data.msg || `Request failed (${res.status})`);
+        }
+        return res.json().then((data) => data.comment);
+    });
+};
